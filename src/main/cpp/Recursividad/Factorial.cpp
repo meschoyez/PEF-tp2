@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int Factorial (int n);
+unsigned long int Factorial (unsigned long int n);
 
 int main (int argc, char* argv[]) {
   int n = 0;
@@ -23,8 +23,8 @@ int main (int argc, char* argv[]) {
 }
 
 
-int Factorial (int n) {
-  int f = 0;
+unsigned long int Factorial (unsigned long int n) {
+  unsigned long int f = 0;
   if ((n == 0) || (n == 1))
     f = 1;
   else if (n > 1)
