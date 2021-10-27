@@ -1,0 +1,82 @@
+\renewcommand{\lstlistingname}{Código}
+
+% Código fuente tipo consola (shell)
+\lstdefinestyle{consola}{
+  backgroundcolor=\color{black},
+  belowcaptionskip=1\baselineskip,
+  frame=,
+  xleftmargin=\parindent,
+  language=bash,
+  basicstyle=\footnotesize\ttfamily\color{white},
+  commentstyle=\itshape\color{purple!40!black}
+}
+
+% Código fuente tipo XML
+\lstdefinestyle{miXML}{
+    language=XML,
+    morekeywords={classpath,classpathentry},
+    basicstyle=\footnotesize\ttfamily\color{white},
+    identifierstyle=\footnotesize\ttfamily\color{SkyBlue},
+    commentstyle=\itshape\color{green!80},
+    stringstyle=\color{Apricot},
+    keywordstyle=\color{cyan!90},
+    breaklines=true,
+    backgroundcolor=\color{black},
+    belowcaptionskip=1\baselineskip,
+    rulecolor=\color{black},
+    frame=trbl,
+    xleftmargin=\parindent
+}
+
+% Código fuente tipo consola (json mejor)
+% \lstdefinelanguage{json}{
+\lstdefinestyle{miJSON}{
+  string=[b][\color{Apricot}]",
+  comment=[l][\itshape\color{green!80}]//,
+  morecomment=[s][\color{SkyBlue}]{:}{,},
+  morekeywords={true,false},
+  basicstyle=\footnotesize\ttfamily\color{white},
+  keywordstyle=\footnotesize\ttfamily\bfseries\color{purple!60},
+  backgroundcolor=\color{black},
+  breaklines=true,
+    belowcaptionskip=1\baselineskip,
+  rulecolor=\color{black},
+  frame=trbl,
+  xleftmargin=\parindent
+}
+
+% Código fuente ANTLR
+\lstdefinestyle{miANTLR}{
+    language=Java,
+    basicstyle=\footnotesize\ttfamily\color{black},
+    identifierstyle=\footnotesize\ttfamily\color{blue},
+    commentstyle=\itshape\color{green},
+    stringstyle=\itshape\color{BrickRed},
+    keywordstyle=\itshape\color{blue},
+    morekeywords={[2]grammar,lexer,\@header,\@members,fragment,skip},
+    keywordstyle={[2]\bfseries\color{MidnightBlue}},
+    moredelim=[s][\color{magenta}]{[}{]},
+    moredelim=*[s][\ttfamily\itshape\footnotesize]{\{}{\}},
+    breaklines=true,
+    backgroundcolor=\color{black!5},
+    belowcaptionskip=1\baselineskip,
+    rulecolor=\color{black},
+    frame=single,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\scriptsize\ttfamily,
+    xleftmargin=\parindent
+}
+
+
+\lstdefinestyle{editor}{
+  backgroundcolor=\color{black!5},
+  belowcaptionskip=1\baselineskip,
+  frame=single,
+  numbers=left,
+  xleftmargin=\parindent,
+  language=bash,
+  basicstyle=\footnotesize\ttfamily\color{black},
+  commentstyle=\itshape\color{purple!40!black},
+}
+

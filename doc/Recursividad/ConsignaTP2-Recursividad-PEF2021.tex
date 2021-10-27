@@ -1,0 +1,235 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{listingsutf8}
+
+\addtolength{\textwidth}{1cm}
+\addtolength{\textheight}{5.3cm}
+\addtolength{\voffset}{-3.1cm}
+
+\title{Programación Eficiente --- Trabajo Práctico Nro. 2}
+\author{Maximiliano A. Eschoyez}
+\date{Fecha de Entrega: miércoles 17 de Noviembre de 2021}
+
+\begin{document}
+
+\input{../Lenguajes.tex}
+
+% 1\pagestyle{empty}
+
+%\maketitle
+
+\begin{center}
+  {\Large \textbf{Programación Eficiente --- Trabajo Práctico Nro. 2}}\\[.25cm]
+
+  {\large Maximiliano A. Eschoyez}\\[.25cm]
+  
+  {Fecha de Entrega: Miércoles \textbf{17 de Noviembre de 2021}}
+\end{center}
+
+\begin{abstract}
+    El objetivo de esta parte de Trabajo Práctico es revisar los temas
+    abordados durante este período sobre \emph{pruebas del sotfware
+    basado en herramientas estándar} para comparar el comportamiento
+    de algoritmos \emph{recursivos} frente a su versión \emph{iterativa}.
+    Además, se realizará la comparación de las versiones \emph{recursivas}
+    para los casos de \emph{Evaluación Ansiosa} (\emph{eager}) y \emph{Evaluación Perezosa} (\emph{lazy}). Finalmente, se hará un estudio
+    de los resultados obtenidos.
+\end{abstract}
+
+\section*{Caso 1: Recursión Simple}
+
+En este caso vamos a utilizar el cálculo del \emph{Factorial} de un número para comparar la eficiencia entre la versión recursiva y la versión iterativa.
+
+La definición matemática del \emph{Factorial} de un número nos dice que:
+\begin{equation*}
+    n! = \left\{ \begin{array}{ll}
+        1                & \text{para } n = 0 \text{ o } n = 1 \\
+        n \cdot (n - 1)! & \text{para } n > 0
+    \end{array} \right.
+\end{equation*}
+
+La función recursiva que resuelve esto es una codificación trivial de la función matemática y podría escribirse de esta forma:
+
+\lstinputlisting[style=editor,linerange={26-33}]{../../src/main/cpp/Recursividad/Factorial.cpp}
+
+La versión iterativa podría escribirse de esta forma:
+
+\lstinputlisting[style=editor,linerange={25-33}]{../../src/main/cpp/Recursividad/Factorial-it.cpp}
+
+Testee las dos versiones para diferentes valores factoriales, trace las curvas con los
+tiempos medidos y responda las siguientes preguntas:
+\begin{enumerate}
+    \item ¿Cuál de las dos es más eficiente?
+    \item ¿Cuál de las dos es más programable?
+    \item ¿El comportamiento de ambas versiones es lineal o exponencial?
+\end{enumerate}
+
+
+\section*{Caso 2: Recursión Doble}
+
+En este caso vamos a utilizar el cálculo de los \emph{Números de Fibonacci}
+para comparar la eficiencia entre la versión recursiva y la versión iterativa.
+
+La definición matemática de los \emph{Números de Fibonacci} nos dice que:
+\begin{equation*}
+    F_n = \left\{ \begin{array}{ll}
+        1                & \text{para } n = 1 \text{ o } n = 2 \\
+        F_{n-1} + F_{n-2} & \text{para } n > 2
+    \end{array} \right.
+\end{equation*}
+
+La función recursiva que resuelve esto es una codificación trivial de la función matemática y podría escribirse de esta forma:
+
+\lstinputlisting[style=editor,linerange={25-33}]{../../src/main/cpp/Recursividad/Fibonacci.cpp}
+
+La versión iterativa podría escribirse de esta forma:
+
+\lstinputlisting[style=editor,linerange={25-36}]{../../src/main/cpp/Recursividad/Fibonacci-it.cpp}
+
+Testee las dos versiones para diferentes valores factoriales, trace las curvas con los
+tiempos medidos y responda las siguientes preguntas:
+\begin{enumerate}
+    \item ¿Cuál de las dos es más eficiente?
+    \item ¿Cuál de las dos es más programable?
+    \item ¿El comportamiento de ambas versiones es lineal o exponencial?
+\end{enumerate}
+
+
+\section*{Caso 3: Combinaciones}
+
+En este caso se debe explorar la implementación del cálculo de las
+\emph{Combinaciones sin repetición}, cuya definición matemática es:
+\begin{equation*}
+    C(n, r) = \begin{pmatrix} n \\ r \end{pmatrix} = \frac{n!}{r!(n-r)!} \quad \text{para } n \geq r
+\end{equation*}
+donde
+\begin{equation*}
+    \begin{pmatrix}
+        n \\ n
+    \end{pmatrix} =
+    \begin{pmatrix}
+        n \\ 0
+    \end{pmatrix} = 1    
+\end{equation*}
+
+Se puede modificar la expresión matemática para que quede expuesta una versión
+recursiva:
+\begin{equation*}
+    \begin{pmatrix} n \\ r \end{pmatrix} =
+    \begin{pmatrix}
+        n - 1 \\ r
+    \end{pmatrix} +
+    \begin{pmatrix}
+        n - 1 \\ r - 1
+    \end{pmatrix}
+\end{equation*}
+
+En este caso se están presentando la versión iterativa de la solución como
+así también un método matemático equivalente para solucionar el problema.
+Se pide analizar los siguientes casos:
+\begin{enumerate}
+    \item Combinaciones con Factorial Recursivo,
+    \item Combinaciones con Factorial Iterativo,
+    \item Combinaciones versión Recursiva.
+\end{enumerate}
+
+
+\section*{Caso 4: Evaluación Ansiosa vs. Perezosa}
+
+La mayoría de los lenguajes y compiladores que utilizamos está pensado para
+el paso de variables por valor.  Este tipo de ejecución se denomina
+\emph{Evaluación Ansiosa} (\emph{Eager Evaluation}).  La evaluación ansiosa
+tiene como inconveniente que no se puede utilizar convenientemente la
+recursividad por limitación del tamaño de pila realizable y el alto consumo
+de recursos que requiere.
+
+Por el contrario, los lenguajes y compiladores que instrumentan la
+\emph{Evaluación Perezosa} (\emph{Lazy Evaluation}) basan su funcionamiento
+en la dilación por el mayor tiempo posible de la evaluación de los cálculos
+necesarios.  Este mecanismo permite implementar algoritmos recursivos y sobre
+conjuntos de datos \emph{virtualmente infinitos} sin inconveniente y a un costo computacional razonable.
+
+En este caso se deberá comparar el comportamiento de los algoritmos
+\emph{Factorial de un número} y \emph{Secuencia de Fibonacci} implementados
+con evaluación perezosa frente a los tiempos medidos con los algoritmos de
+los casos anteriores.
+
+El \emph{Factorial de un número} en Haskell se puede definir como
+\lstinputlisting[style=editor,linerange={3-7}]{../../src/main/haskell/Factorial.hs}
+
+La \emph{Secuencia de Fibonacci} en Haskell se puede definir como
+\lstinputlisting[style=editor,linerange={3-8}]{../../src/main/haskell/Fibonacci.hs}
+
+No olvide implementar los algoritmos para \emph{Combinaciones sin repetición}
+en Haskell (solo versiones recursivas).
+
+\section*{Nota}
+
+Para la realización de este estudio se aconseja desarrollar \emph{shell scripts}
+que le permitan la repetibilidad de las pruebas a realizar.
+
+Se pide que se midan los tiempos de ejecución de cada versión para
+diferentes valores de entrada. También se pide que se estudie el número
+de llamadas a las funciones para cada versión. Estos resultados deberán
+verse reflejados en gráficos comparativos y árboles de llamadas.
+
+No olvide hacer las comparaciones para la compilación sin y con optimizaciones
+del compilador (\verb|gcc| y \verb|ghc| con \verb|-O1|, \verb|-O2| y
+\verb|-O3|) 
+
+A la hora de entregar los resultados envíe el informe en formato PDF y
+los código fuente utilizados tanto de los programas como de los \emph{shell scripts}.
+
+\newpage
+
+\section*{Presentación del Trabajo Práctico}
+
+\subsection*{Conformación de los grupos}
+
+El trabajo práctico podrá realizarse en forma individual o grupal,
+prefiriéndose la modalidad de trabajo en equipo.  Los grupos de
+trabajo podrán estar conformados por hasta dos (2) estudiantes, no
+siendo admisibles grupos con mayor número de integrantes.
+
+
+\subsection*{Informe Escrito}
+
+Se debe presentar un informe escrito donde se describa la problemática
+abordada en el trabajo práctico, el desarrollo de la solución
+propuesta, los resultados de las mediciones pertinentes y los
+resultados logrados.  El texto deberá ser conciso y con descripciones
+apropiadas.  No se debe incluir el código fuente, sino los textos
+necesarios para realizar las explicaciones pertinentes.
+
+\textbf{Sólo se aceptarán informes en formato PDF.}
+
+
+\subsection*{Archivos Relacionados al Trabajo}
+
+Todos los archivos de código fuente, archivos utilizados en el
+desarrollo del trabajo y la versi\'on digital del informe deben
+entregarse a través de la plataforma MiUBP (\verb|http://mi.ubp.edu.ar/|).
+Además, se debe incluir una breve descripción sobre los archivos entregados
+y la estructura de directorios utilizada para organizar los archivos.
+
+\textbf{Sólo se aceptará la entrega en formato ZIP.}
+
+
+\subsection*{Aprobación del Trabajo Práctico}
+
+El trabajo práctico deberá estar completo el día de entrega
+estipulado.  En caso de no presentación o presentación incompleta
+quedará como no aprobado.  Si el docente considera que está aprobado
+pero tiene observaciones, se estipulará una nueva fecha de entrega
+para presentar las modificaciones indicadas oportunamente.
+
+\textbf{No se aceptarán informes incompletos y formatos de archivos
+  distintos a los indicados}.
+
+\end{document}
