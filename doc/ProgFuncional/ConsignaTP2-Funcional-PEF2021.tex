@@ -1,0 +1,60 @@
+\section*{Programación Funcional en Java}
+
+Desde la versión 8 de Java se pueden realizar operaciones propias de
+la \href{https://www.oracle.com/technical-resources/articles/java/architect-lambdas-part1.html}{Programación Funcional}
+mediante las herramientas provistas en el paquete
+\href{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/package-use.html}{Stream}.
+
+El proyecto \emph{Figuras Avanzadas} está implementado de forma
+tal que se comporta como un generador aleatorio de figuras
+geométricas simples y las gestiona desde una colección de tipo
+lista.  Para poder comparar el comportamiento de un recorrido
+estándar sobre colecciones se implementaron las versiones con
+\emph{for--each} y con \emph{streams}.
+
+\subsection*{Creación de las Figuras Geométricas}
+
+Las figuras se crean aleatoriamente por \emph{reflection} en la clase \verb|HerramientaDeAzar|
+
+\lstinputlisting[style=editor,linerange={21-35}]{../src/main/java/FigurasAvanzadas/HerramientaDeAzar.java}
+
+Este generador se invoca desde la clase \verb|GestorFiguras| en
+versión con \emph{for} tipo~C
+
+\lstinputlisting[style=editor,linerange={57-64}]{../src/main/java/FigurasAvanzadas/GestorFiguras.java}
+
+y en versión con \emph{streams}
+
+\lstinputlisting[style=editor,linerange={72-75}]{../src/main/java/FigurasAvanzadas/GestorFiguras.java}
+
+
+\subsection*{Acciones sobre la colección}
+
+Para poder comparar recorridos sobre la lista, se aplican dos filtros.
+El primero, toma los elementos que poseen una superficie mayor a un valor
+dado y los coloca en una nueva lista.  El segundo, toma los elementos
+de la clase \verb|Rectangulo| mediante \emph{type casting} y los coloca
+en una nueva lista.
+
+El filtrado por superficie en versión \emph{for--each} es
+
+\lstinputlisting[style=editor,linerange={84-93}]{../src/main/java/FigurasAvanzadas/GestorFiguras.java}
+
+y en versión \emph{streams} es
+
+\lstinputlisting[style=editor,linerange={101-105}]{../src/main/java/FigurasAvanzadas/GestorFiguras.java}
+
+
+El filtrado por clase en versión \emph{for--each} es
+
+\lstinputlisting[style=editor,linerange={111-120}]{../src/main/java/FigurasAvanzadas/GestorFiguras.java}
+
+y en versión \emph{streams} es
+
+\lstinputlisting[style=editor,linerange={126-130}]{../src/main/java/FigurasAvanzadas/GestorFiguras.java}
+
+
+\subsection*{Actividad}
+
+Para este apartado, se solicita comparar los tiempos de ejecución,
+creación de objetos y cosumo de memoria para ambas implementaciones.

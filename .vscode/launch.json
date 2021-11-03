@@ -12,10 +12,9 @@
         },
         {
             "type": "java",
-            "name": "Launch App",
+            "name": "Launch Figuras",
             "request": "launch",
-            "mainClass": "FoxesAndRabbits.App",
-            "projectName": "tp2"
+            "mainClass": "FigurasAvanzadas.App",
         },
         {
             "type": "java",

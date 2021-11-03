@@ -1,0 +1,60 @@
+\section*{Reutilización de Objetos}
+
+\subsection*{Garbage Collector}
+
+Los lenguajes que implementan el \emph{garbage collector} fueron
+diseñados para disminuir la carga al programador al desligarlo de
+controlar la asignación/liberación de memoria. Esto hace que el
+programador solo deba preocuparse de pedir la creación de los objetos,
+utilizarlos y luego simplemente desreferenciarlos. La tarea de limpieza
+de la memoria queda a cargo de otro. Sin embargo, la ``recolección de
+(memoria) basura'' tiene costo computacional.
+
+En los programas cuya memoria es bastante estática a lo largo de su
+ejecución, la tareas del \emph{garbage collector} es baja. En cambio,
+si la tasa de asignación/liberación de memoria es muy alta, el
+``recolector de basura'' tendrá mucho mayor trabajo, produciendo picos
+de consumo de recursos a la hora de realizar esta tarea.
+
+La activación de la liberación de memoria tiene diferentes políticas y
+el programador puede pedir que se utilice alguna en particular. Sin
+embargo, no está a cargo del programador la liberación de memoria, por
+lo cual, se hará cuando el \emph{garbage collector} determine que es
+momento apropiado.
+
+
+\subsection*{Reutilización de Objetos}
+
+Si estamos frente a un programa que requiere gran generación/destrucción
+de objetos se puede optar por una política de reutilización de los objetos.
+En este caso, en lugar de crear un nuevo objeto cada vez que se lo necesite
+se reinicializará un objeto existente en desuso para adaptarlo a la nueva
+tarea. De esta forma se logran dos objetivos:
+\begin{itemize}
+    \item se evita el costo computacional requerido por el constructor del
+    objeto y
+    \item se libera al \emph{garbage collector} de su tarea de llamada al
+    destructor y liberación de la memoria.
+\end{itemize}
+Por supuesto, para que la reutilización de objetos sea factible deberá mantenerse una referencia a los objetos en desuso dentro de algún tipo
+de colección.
+
+
+\subsection*{Conigna}
+
+Para la realización de este estudio se aconseja trabajar sobre la IDE
+NetBeans utilizando el \emph{profiler} provisto.
+
+Se pide que estudie el comportamiento del programa “Zorros y Conejos”.
+Este programa es un proyecto BlueJ que se entrega convertido en un
+proyecto con Maven para poder trabajar. El programa es una simulación
+que requiere una alta tasa de creación/destrucción de objetos (zorros
+y conejos) para estudiar el comportamiento de sus nacimientos/muertes.
+
+Una vez estudiado el programa deberá planificar e implementar una
+propuesta de reutilización de objetos.
+
+Se pide que se midan los tiempos de ejecución de cada versión. Estos
+resultados deberán verse reflejados en gráficos comparativos y árboles
+de llamadas.
+
